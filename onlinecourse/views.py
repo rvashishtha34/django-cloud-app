@@ -154,7 +154,7 @@ def show_exam_result(request, course_id, submission_id):
     selected = []
     #questions = Question.objects.values_list('id', flat=True)
     #final_score = 0
-    total_score = Question.objects.aggregate(Sum('gradepoint'))['gradepoint__sum']
+    total_score = Question.objects.filter(course=course).aggregate(Sum('gradepoint'))['gradepoint__sum']
     for choice in submission.choices.all():
         if choice.is_correct:
             selected.append(choice.id)
